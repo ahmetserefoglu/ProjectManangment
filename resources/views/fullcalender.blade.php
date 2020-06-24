@@ -15,8 +15,11 @@
         <!-- the events -->
         <div id="external-events">
           @foreach($tasks as $task)
-          <div class="external-event ">{{$task->name}}</div>
-
+          <div class="external-event ">
+            {{$task->name}}
+            
+          </div>
+          
           @endforeach
           <div class="checkbox">
             <label for="drop-remove">
@@ -141,6 +144,7 @@
               // retrieve the dropped element's stored Event Object
               var originalEventObject = $(this).data('eventObject')
 
+
               console.log(originalEventObject);
               // we need to copy it, so that multiple events don't have a reference to the same object
               var copiedEventObject = $.extend({}, originalEventObject)
@@ -151,7 +155,7 @@
               copiedEventObject.backgroundColor = $(this).css('background-color')
               copiedEventObject.borderColor     = $(this).css('border-color')
 
-              console.log(copiedEventObject.borderColor);
+              console.log(copiedEventObject);
               var rgb = copiedEventObject.borderColor;
 
                 rgb = rgb.substring(4, rgb.length-1)
@@ -168,7 +172,7 @@
                   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
                 }
 
-                alert(copiedEventObject.borderColor);
+                
               // render the event on the calendar
               // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
               $('#calendar').fullCalendar('renderEvent', copiedEventObject, true)
@@ -218,8 +222,9 @@
                 // drop on a new date and submit to database
                 eventDrop: function(event, delta, revertFunc, jsEvent, view) {
 
-                  console.log(event);
+                  console.log("Burası"+event);
                   var originalEventObject = $(this).data('eventObject')
+                  console.log("Burası1"+originalEventObject);
                   console.log(originalEventObject);
                   swal({
                     title: "You moved the event. Save it?",
@@ -315,11 +320,11 @@
 
             console.log(result);
 
-            $('#calendar').fullCalendar('renderEvent', {
-              title: result.task.name,
-              start: result.task.start_date,
-              end: result.task.end_date
-            }, true);
+            // $('#calendar').fullCalendar('renderEvent', {
+            //   title: result.task.name,
+            //   start: result.task.start_date,
+            //   end: result.task.end_date
+            // }, true);
 
             $('#editModal').modal('hide');
           });

@@ -117,14 +117,26 @@ class TaskController extends Controller {
 
 	public function ajaxUpdate(Request $request) {
 
-		$task = Task::find($request->id);
+		if ($request->id) {
+			$task = Task::find($request->id);
 
-		$task->user_id = Auth::user()->id;
-		$task->name = $request->name;
-		$task->start_date = $request->start_date;
-		$task->end_date = $request->end_date;
+			$task->user_id = 1;
+			$task->name = $request->name;
+			$task->start_date = $request->start_date;
+			$task->end_date = $request->end_date;
+			$task->save();
+		}else{
+			$task = Task::create([
+			'name' => $request->name,
+			'user_id' => Auth::user()->id,
+			'start_date' => $request->start_date,
+			'end_date' => $request->end_date
+		]);
+		}
+		
 
-		$task->save();
+		
+
 
 		return response()->json(['task' => $task]);
 	}

@@ -94,17 +94,16 @@
 													@endif
 												</i>
 											</div>
-											
+
 											<div class="product-info">
 												<a href="javascript:void(0)" class="product-title">{{$task->name}}
 													<span class="label label-warning pull-right"><i class="fa fa-calendar"></i>
 														{{$task->start_date}}</span></a>
 														<span class="product-description">
-															{{$task->description}}
 														</span>
 													</div>
 													@endforeach
-												</li>		
+												</li>
 											</ul>
 										</div>
 									</div>
