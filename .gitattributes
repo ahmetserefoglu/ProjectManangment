@@ -1,3 +1,4 @@
 *.php linguist-detectable=true
+*.js linguist-detectable=true
 *.html linguist-detectable=true
 CHANGELOG.md export-ignore
