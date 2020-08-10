@@ -120,6 +120,8 @@ Route::post('proje/upload', 'FileUploadController@store')->name('proje.upload');
 Route::post('upload', 'FileUploadController@upload')->name('upload');
 Route::get('etkinlik2', 'EventController@taskEvent');
 
+Route::get('firmabul/{firmaId}','EventController@firmabul');
+
 Route::get('etkinlik', 'EventController@index')->name('events.index');
 Route::post('etkinlik', 'EventController@addEvent')->name('events.add');
 

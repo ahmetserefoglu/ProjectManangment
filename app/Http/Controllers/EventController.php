@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Gorev;
+use App\Firmalar;
+use App\Proje;
 use App\Task;
 use Calendar;
 use Illuminate\Http\Request;
@@ -68,10 +71,31 @@ class EventController extends Controller {
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
+	public function firmaBul($firmaId) {
+		//
+		$events = [];
+		$data = Event::all();
+		$gorevler = Gorev::all();
+		$firmalar = Firmalar::all();
+		$projeler = Proje::all();
+
+		return  \response()->json($projeler);
+		/*$page_title='Etkinlik';
+			                    $page_alt_title='Etkinlik Takvimi';
+		*/
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
 	public function taskEvent() {
 		//
 		$events = [];
 		$data = Event::all();
+		$gorevler = Gorev::all();
+		$firmalar = Firmalar::all();
 		if ($data->count()) {
 			foreach ($data as $key => $value) {
 				$events[] = Calendar::event(
@@ -91,7 +115,7 @@ class EventController extends Controller {
 		$page_title = 'Etkinlik';
 		$calendar_details = Calendar::addEvents($events);
 		$tasks = Task::all();
-		return view('fullcalender', compact('calendar_details', 'tasks', 'page_title'));
+		return view('fullcalender', compact('calendar_details', 'tasks', 'page_title','firmalar'));
 		/*$page_title='Etkinlik';
 			                    $page_alt_title='Etkinlik Takvimi';
 		*/
