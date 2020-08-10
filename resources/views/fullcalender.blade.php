@@ -90,16 +90,6 @@
           <input type="hidden" name="task_id" id="task_id" value="" />
           <h4>Edit Task</h4>
 
-           <select name="firma_id" id="firma_id" class="form-control">
-                            <option  value="0">Firma Seçiniz</option>
-                            @foreach ($firmalar as $firma)
-                            <option value="{{ $firma->id }}">{{$firma->FirmaAdi}}</option>
-                            @endforeach
-                        </select>
-
-                        <select name="musteri_id" id="musteri_id" class="form-control">
-                           <option></option>
-                        </select>
           Görev:
           <br />
           <input type="text" class="form-control" name="task_name" id="task_name">
@@ -155,7 +145,7 @@
               var originalEventObject = $(this).data('eventObject')
 
 
-              console.log("originalEventObject");
+              console.log(originalEventObject);
               // we need to copy it, so that multiple events don't have a reference to the same object
               var copiedEventObject = $.extend({}, originalEventObject)
 
@@ -212,36 +202,8 @@
                     //Change background color of day when it is clicked
                     $(this).css('background-color', '#bed7f3');
                     console.log(date);
-                    var date_clicked =  date.format();
-                    $('#start_date').val(moment(date_clicked).format('YYYY-MM-DD'));
-
-                    $('#firma_id').change(function(e) {
-                      e.preventDefault();
-                      var firma_id = $('#firma_id').val();
-
-                      $.get('/firmabul/'+ firma_id, function( result ) {
-                        console.log(result)
-                        var fruits = [];
-                        var $mySelect = $('#musteri_id');
-                        //
-                        $.each(result, function(key, value) {
-                          console.log(value)
-                          var $option = $("<option/>", {
-                            value: key,
-                            text: value.ProjeAdi
-                          });
-                          $mySelect.append($option);
-                        });
-
-                        //$('#editModal').modal('hide');
-                      });
-                    });
-
-                    $('#editModal').modal();
-
                     //Get the date that was clicked
-                   
-                    console.log(date_clicked);
+                    var date_clicked =  date.format();
                     //Redirect to the new event entry form
                    // window.location.href = "{{URL::to('events')}}" + "/" + date_clicked;
                  },
